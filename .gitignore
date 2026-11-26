@@ -33,3 +33,9 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Release APK required by the assignment
+!apk/app-release.apk
+
+.DS_Store
+
