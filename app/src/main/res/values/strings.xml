@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Мобилни приложения проект</string>
+    <string name="app_name">Читателски дневник</string>
+    <string name="welcome_subtitle">Твоите книги, бележки и прочетени страници на едно място</string>
 </resources>

@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Material 3 palette for the reading diary: warm "paper and leather" tones. -->
+
+    <!-- Light scheme -->
+    <color name="md_light_primary">#FF8B4F24</color>
+    <color name="md_light_onPrimary">#FFFFFFFF</color>
+    <color name="md_light_primaryContainer">#FFFFDBC8</color>
+    <color name="md_light_onPrimaryContainer">#FF331200</color>
+    <color name="md_light_secondary">#FF765848</color>
+    <color name="md_light_onSecondary">#FFFFFFFF</color>
+    <color name="md_light_secondaryContainer">#FFFFDBC8</color>
+    <color name="md_light_onSecondaryContainer">#FF2B160A</color>
+    <color name="md_light_tertiary">#FF636032</color>
+    <color name="md_light_onTertiary">#FFFFFFFF</color>
+    <color name="md_light_tertiaryContainer">#FFEAE5AA</color>
+    <color name="md_light_onTertiaryContainer">#FF1E1C00</color>
+    <color name="md_light_error">#FFBA1A1A</color>
+    <color name="md_light_onError">#FFFFFFFF</color>
+    <color name="md_light_errorContainer">#FFFFDAD6</color>
+    <color name="md_light_onErrorContainer">#FF410002</color>
+    <color name="md_light_surface">#FFFFF8F5</color>
+    <color name="md_light_onSurface">#FF221A15</color>
+    <color name="md_light_surfaceVariant">#FFF4DED3</color>
+    <color name="md_light_onSurfaceVariant">#FF52443C</color>
+    <color name="md_light_outline">#FF85746B</color>
+
+    <!-- Dark scheme -->
+    <color name="md_dark_primary">#FFFFB68A</color>
+    <color name="md_dark_onPrimary">#FF532200</color>
+    <color name="md_dark_primaryContainer">#FF6E380E</color>
+    <color name="md_dark_onPrimaryContainer">#FFFFDBC8</color>
+    <color name="md_dark_secondary">#FFE6BEAB</color>
+    <color name="md_dark_onSecondary">#FF432B1D</color>
+    <color name="md_dark_secondaryContainer">#FF5C4132</color>
+    <color name="md_dark_onSecondaryContainer">#FFFFDBC8</color>
+    <color name="md_dark_tertiary">#FFCEC991</color>
+    <color name="md_dark_onTertiary">#FF343108</color>
+    <color name="md_dark_tertiaryContainer">#FF4B481D</color>
+    <color name="md_dark_onTertiaryContainer">#FFEAE5AA</color>
+    <color name="md_dark_error">#FFFFB4AB</color>
+    <color name="md_dark_onError">#FF690005</color>
+    <color name="md_dark_errorContainer">#FF93000A</color>
+    <color name="md_dark_onErrorContainer">#FFFFDAD6</color>
+    <color name="md_dark_surface">#FF1A120D</color>
+    <color name="md_dark_onSurface">#FFF0DFD7</color>
+    <color name="md_dark_surfaceVariant">#FF52443C</color>
+    <color name="md_dark_onSurfaceVariant">#FFD7C2B8</color>
+    <color name="md_dark_outline">#FFA08D84</color>
+
+    <!-- App icon -->
+    <color name="ic_launcher_background">#FF8B4F24</color>
+    <color name="ic_launcher_bookmark">#FFF2C14E</color>
 </resources>
