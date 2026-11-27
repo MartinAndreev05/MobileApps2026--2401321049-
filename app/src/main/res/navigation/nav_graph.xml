@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_bookList_to_bookDetail"
             app:destination="@id/bookDetailFragment" />
+        <action
+            android:id="@+id/action_bookList_to_bookSearch"
+            app:destination="@id/bookSearchFragment" />
     </fragment>
 
     <fragment
@@ -25,5 +28,37 @@
             android:name="bookId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <!-- Optional values for a new book, filled in from an Open Library search result. -->
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="author"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="coverUrl"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_bookDetail_to_bookSearch"
+            app:destination="@id/bookSearchFragment"
+            app:popUpTo="@id/bookListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookSearchFragment"
+        android:name="bg.uni_plovdiv.fmi.mobileapps.ui.search.BookSearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_book_search">
+        <!-- Search is replaced by the filled-in form, so Back from the form goes to the list. -->
+        <action
+            android:id="@+id/action_bookSearch_to_bookDetail"
+            app:destination="@id/bookDetailFragment"
+            app:popUpTo="@id/bookListFragment" />
     </fragment>
 </navigation>

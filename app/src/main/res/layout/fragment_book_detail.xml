@@ -12,6 +12,31 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Only for a new book: fill the form from Open Library. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/searchOnlineButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/action_search_online"
+            android:visibility="gone"
+            app:icon="@drawable/ic_search"
+            tools:visibility="visible" />
+
+        <!-- Shown when the book has a cover from Open Library. -->
+        <ImageView
+            android:id="@+id/coverImage"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/cover_description"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            tools:src="@drawable/ic_cover_placeholder"
+            tools:visibility="visible" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titleLayout"
             style="?attr/textInputOutlinedStyle"

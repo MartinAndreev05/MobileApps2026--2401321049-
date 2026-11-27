@@ -32,6 +32,21 @@
     <string name="delete_dialog_message">„%1$s“ ще бъде премахната от дневника ти.</string>
     <string name="book_deleted">„%1$s“ е изтрита</string>
 
+    <!-- Open Library search -->
+    <string name="title_search">Търсене в Open Library</string>
+    <string name="action_search_online">Търси в Open Library</string>
+    <string name="hint_search">Заглавие, автор или ISBN</string>
+    <string name="search_hint">Потърси книга и я избери – заглавието, авторът и корицата ще се попълнят сами.</string>
+    <string name="search_no_results">Няма резултати за „%1$s“</string>
+    <string name="action_retry">Опитай пак</string>
+    <string name="unknown_author">Неизвестен автор</string>
+    <string name="error_query_too_short">Въведи поне 2 знака</string>
+    <string name="error_no_internet">Няма връзка с интернет. Провери мрежата и опитай пак.</string>
+    <string name="error_timeout">Сървърът не отговори навреме. Опитай пак.</string>
+    <string name="error_server">Open Library върна грешка. Опитай малко по-късно.</string>
+    <string name="error_unknown">Нещо се обърка. Опитай пак.</string>
+    <string name="cover_description">Корица на книгата</string>
+
     <!-- Form errors -->
     <string name="error_required">Задължително поле</string>
     <string name="error_too_long">Текстът е твърде дълъг</string>

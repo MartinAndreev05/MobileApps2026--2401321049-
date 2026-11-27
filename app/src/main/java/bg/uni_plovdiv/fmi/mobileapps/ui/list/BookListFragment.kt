@@ -2,11 +2,16 @@ package bg.uni_plovdiv.fmi.mobileapps.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -49,6 +54,23 @@ class BookListFragment : Fragment() {
             binding.emptyState.isVisible = books.isEmpty()
             binding.bookList.isVisible = books.isNotEmpty()
         }
+
+        // Search icon in the toolbar, only while this screen is visible.
+        requireActivity().addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_book_list, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    if (menuItem.itemId != R.id.action_search_online) return false
+                    findNavController().navigate(BookListFragmentDirections.actionBookListToBookSearch())
+                    return true
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED,
+        )
 
         binding.addBookFab.setOnClickListener {
             // Default bookId (-1): the detail screen opens in "new book" mode.

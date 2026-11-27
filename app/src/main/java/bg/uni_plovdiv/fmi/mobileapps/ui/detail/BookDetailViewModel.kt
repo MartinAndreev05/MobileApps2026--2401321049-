@@ -27,11 +27,25 @@ class BookDetailViewModel @Inject constructor(
 
     private val bookId: Long = savedStateHandle[ARG_BOOK_ID] ?: NEW_BOOK_ID
 
+    /** Values picked in the Open Library search; only used for a new book. */
+    private val prefillTitle: String? = savedStateHandle[ARG_TITLE]
+    private val prefillAuthor: String? = savedStateHandle[ARG_AUTHOR]
+    private val prefillCoverUrl: String? = savedStateHandle[ARG_COVER_URL]
+
     val isNewBook: Boolean get() = bookId == NEW_BOOK_ID
 
-    /** The book being edited, loaded once from the database. Emits nothing for a new book. */
+    /**
+     * The book shown in the form: the edited book loaded from the database, or, for a
+     * new book picked in the search, an unsaved book with the found values.
+     * Emits nothing for an empty new book.
+     */
     val book: LiveData<Book?> = liveData {
-        if (!isNewBook) emit(repository.getBook(bookId))
+        when {
+            !isNewBook -> emit(repository.getBook(bookId))
+            prefillTitle != null -> emit(
+                Book(title = prefillTitle, author = prefillAuthor.orEmpty(), coverUrl = prefillCoverUrl)
+            )
+        }
     }
 
     private val _errors = MutableLiveData(BookFormErrors())
@@ -66,7 +80,13 @@ class BookDetailViewModel @Inject constructor(
             val existing = if (isNewBook) null else repository.getBook(bookId)
             if (existing == null) {
                 repository.addBook(
-                    Book(title = cleanTitle, author = cleanAuthor, notes = cleanNotes, status = status)
+                    Book(
+                        title = cleanTitle,
+                        author = cleanAuthor,
+                        notes = cleanNotes,
+                        status = status,
+                        coverUrl = prefillCoverUrl,
+                    )
                 )
             } else {
                 repository.updateBook(
@@ -109,8 +129,11 @@ class BookDetailViewModel @Inject constructor(
     }
 
     companion object {
-        /** Name of the navigation argument, as declared in nav_graph.xml. */
+        /** Names of the navigation arguments, as declared in nav_graph.xml. */
         const val ARG_BOOK_ID = "bookId"
+        const val ARG_TITLE = "title"
+        const val ARG_AUTHOR = "author"
+        const val ARG_COVER_URL = "coverUrl"
         const val NEW_BOOK_ID = -1L
     }
 }

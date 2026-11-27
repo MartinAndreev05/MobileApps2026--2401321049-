@@ -10,36 +10,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-        <TextView
-            android:id="@+id/bookTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            tools:text="Под игото" />
+        <ImageView
+            android:id="@+id/bookCover"
+            android:layout_width="48dp"
+            android:layout_height="72dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_cover_placeholder" />
 
-        <TextView
-            android:id="@+id/bookAuthor"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            tools:text="Иван Вазов" />
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/bookStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="?attr/colorPrimary"
-            tools:text="Чета" />
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                tools:text="Под игото" />
+
+            <TextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="Иван Вазов" />
+
+            <TextView
+                android:id="@+id/bookStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorPrimary"
+                tools:text="Чета" />
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

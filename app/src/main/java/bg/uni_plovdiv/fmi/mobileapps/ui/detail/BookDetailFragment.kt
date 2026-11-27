@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import bg.uni_plovdiv.fmi.mobileapps.R
 import bg.uni_plovdiv.fmi.mobileapps.data.local.ReadingStatus
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookDetailBinding
+import bg.uni_plovdiv.fmi.mobileapps.ui.loadCover
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +52,17 @@ class BookDetailFragment : Fragment() {
 
         // viewLifecycleOwner (not the fragment itself) stops the observers when the view
         // is destroyed, so they never touch a dead view and the view is not leaked.
+        binding.searchOnlineButton.isVisible = viewModel.isNewBook
+        binding.searchOnlineButton.setOnClickListener {
+            findNavController().navigate(BookDetailFragmentDirections.actionBookDetailToBookSearch())
+        }
+
         viewModel.book.observe(viewLifecycleOwner) { book ->
+            binding.coverImage.isVisible = book?.coverUrl != null
+            if (book?.coverUrl != null) binding.coverImage.loadCover(book.coverUrl)
+            // A book from the search doesn't need the search button any more.
+            if (book != null) binding.searchOnlineButton.isVisible = false
+
             // After a rotation the fields restore what the user typed; don't overwrite it.
             if (book != null && savedInstanceState == null) {
                 binding.titleInput.setText(book.title)

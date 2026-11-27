@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stand-in cover: a tinted rectangle with a small book. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorSurfaceVariant" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:gravity="center">
+        <vector
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="48"
+            android:viewportHeight="48">
+            <path
+                android:fillColor="?attr/colorOutline"
+                android:pathData="M4,10C9,7.5 16,7.5 22,11L22,40C16,36.5 9,36.5 4,39ZM26,11C32,7.5 39,7.5 44,10L44,39C39,36.5 32,36.5 26,40Z" />
+        </vector>
+    </item>
+</layer-list>
