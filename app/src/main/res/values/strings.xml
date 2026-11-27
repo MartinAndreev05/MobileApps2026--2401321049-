@@ -11,9 +11,20 @@
     <string name="empty_list_hint">Натисни + за да добавиш първата</string>
     <string name="action_add_book">Добави книга</string>
 
+    <!-- Reading status -->
+    <string name="label_status">Статус</string>
+    <string name="status_want_to_read">Искам да я прочета</string>
+    <string name="status_want_to_read_short">Ще чета</string>
+    <string name="status_reading">Чета</string>
+    <string name="status_read">Прочетена</string>
+
     <!-- Book form -->
     <string name="hint_title">Заглавие</string>
     <string name="hint_author">Автор</string>
     <string name="hint_notes">Бележки</string>
     <string name="action_save">Запази</string>
+
+    <!-- Form errors -->
+    <string name="error_required">Задължително поле</string>
+    <string name="error_too_long">Текстът е твърде дълъг</string>
 </resources>

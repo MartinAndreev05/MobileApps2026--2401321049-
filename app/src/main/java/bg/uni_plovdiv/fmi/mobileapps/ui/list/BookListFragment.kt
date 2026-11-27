@@ -33,9 +33,14 @@ class BookListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = BookAdapter()
+        binding.bookList.adapter = adapter
+
         // viewLifecycleOwner stops the observer when the view is destroyed (no leaks).
         viewModel.books.observe(viewLifecycleOwner) { books ->
+            adapter.submitList(books)
             binding.emptyState.isVisible = books.isEmpty()
+            binding.bookList.isVisible = books.isNotEmpty()
         }
 
         binding.addBookFab.setOnClickListener {

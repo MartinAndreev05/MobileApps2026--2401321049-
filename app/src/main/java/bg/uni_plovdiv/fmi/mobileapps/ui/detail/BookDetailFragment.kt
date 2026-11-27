@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import bg.uni_plovdiv.fmi.mobileapps.R
+import bg.uni_plovdiv.fmi.mobileapps.data.local.ReadingStatus
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookDetailBinding
+import com.google.android.material.textfield.TextInputLayout
 
 /** Add / edit screen for a book. All state lives in [BookDetailViewModel]. */
 class BookDetailFragment : Fragment() {
@@ -43,15 +48,58 @@ class BookDetailFragment : Fragment() {
                 binding.titleInput.setText(book.title)
                 binding.authorInput.setText(book.author)
                 binding.notesInput.setText(book.notes)
+                binding.statusGroup.check(book.status.buttonId())
             }
         }
+        viewModel.errors.observe(viewLifecycleOwner) { errors ->
+            binding.titleLayout.showError(errors.title)
+            binding.authorLayout.showError(errors.author)
+            binding.notesLayout.showError(errors.notes)
+        }
         viewModel.saved.observe(viewLifecycleOwner) { saved ->
-            if (saved) findNavController().navigateUp()
+            if (saved) {
+                WindowCompat.getInsetsController(requireActivity().window, binding.root)
+                    .hide(WindowInsetsCompat.Type.ime())
+                findNavController().navigateUp()
+            }
         }
 
         binding.saveButton.setOnClickListener {
-            // Validation and the call to viewModel.save() are added with the create flow.
-            findNavController().navigateUp()
+            viewModel.save(
+                title = binding.titleInput.text?.toString().orEmpty(),
+                author = binding.authorInput.text?.toString().orEmpty(),
+                notes = binding.notesInput.text?.toString().orEmpty(),
+                status = selectedStatus(),
+            )
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        // Added only after Android has put back the typed text (e.g. after a rotation);
+        // otherwise restoring the text would count as typing and clear the errors.
+        binding.titleInput.doAfterTextChanged { viewModel.clearTitleError() }
+        binding.authorInput.doAfterTextChanged { viewModel.clearAuthorError() }
+        binding.notesInput.doAfterTextChanged { viewModel.clearNotesError() }
+    }
+
+    private fun selectedStatus(): ReadingStatus = when (binding.statusGroup.checkedButtonId) {
+        R.id.statusReading -> ReadingStatus.READING
+        R.id.statusRead -> ReadingStatus.READ
+        else -> ReadingStatus.WANT_TO_READ
+    }
+
+    private fun ReadingStatus.buttonId(): Int = when (this) {
+        ReadingStatus.WANT_TO_READ -> R.id.statusWantToRead
+        ReadingStatus.READING -> R.id.statusReading
+        ReadingStatus.READ -> R.id.statusRead
+    }
+
+    private fun TextInputLayout.showError(error: FieldError?) {
+        this.error = when (error) {
+            FieldError.REQUIRED -> getString(R.string.error_required)
+            FieldError.TOO_LONG -> getString(R.string.error_too_long)
+            null -> null
         }
     }
 

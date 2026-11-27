@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.list.BookListFragment">
 
-    <!-- Empty state. The RecyclerView with the books comes with the Room database. -->
+    <!-- Bottom padding keeps the last card above the + button. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="88dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_book" />
+
+    <!-- Shown instead of the list while there are no books. -->
     <LinearLayout
         android:id="@+id/emptyState"
         android:layout_width="match_parent"
@@ -14,7 +25,9 @@
         android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="32dp">
+        android:padding="32dp"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <ImageView
             android:layout_width="96dp"
