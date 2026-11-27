@@ -4,18 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import bg.uni_plovdiv.fmi.mobileapps.ReadingDiaryApplication
 import bg.uni_plovdiv.fmi.mobileapps.data.BookRepository
 import bg.uni_plovdiv.fmi.mobileapps.data.local.Book
 import bg.uni_plovdiv.fmi.mobileapps.data.local.ReadingStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * State for the add / edit book screen.
@@ -23,7 +19,8 @@ import kotlinx.coroutines.launch
  * The bookId navigation argument arrives through [SavedStateHandle]:
  * [NEW_BOOK_ID] means "add a new book", any other value is the book to edit.
  */
-class BookDetailViewModel(
+@HiltViewModel
+class BookDetailViewModel @Inject constructor(
     private val repository: BookRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -115,12 +112,5 @@ class BookDetailViewModel(
         /** Name of the navigation argument, as declared in nav_graph.xml. */
         const val ARG_BOOK_ID = "bookId"
         const val NEW_BOOK_ID = -1L
-
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val app = this[APPLICATION_KEY] as ReadingDiaryApplication
-                BookDetailViewModel(app.bookRepository, createSavedStateHandle())
-            }
-        }
     }
 }

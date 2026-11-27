@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * The app's local SQLite database (file "reading_diary.db").
  *
+ * Hilt keeps a single instance for the whole app (see di/DatabaseModule).
  * When the schema changes, raise [version] and add a Migration so existing
  * users keep their books. The schema of every version is exported to app/schemas.
  */
@@ -19,17 +20,11 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "reading_diary.db"
 
-        @Volatile
-        private var instance: AppDatabase? = null
-
-        /** Returns the single database instance, creating it on first use. */
-        fun getInstance(context: Context): AppDatabase =
-            instance ?: synchronized(this) {
-                instance ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    DATABASE_NAME,
-                ).build().also { instance = it }
-            }
+        fun create(context: Context): AppDatabase =
+            Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                DATABASE_NAME,
+            ).build()
     }
 }

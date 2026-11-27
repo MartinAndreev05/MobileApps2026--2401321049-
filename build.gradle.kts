@@ -4,4 +4,5 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.navigation.safeargs) apply false
+    alias(libs.plugins.hilt) apply false
 }

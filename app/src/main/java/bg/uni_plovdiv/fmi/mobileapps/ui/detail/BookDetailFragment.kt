@@ -21,14 +21,16 @@ import bg.uni_plovdiv.fmi.mobileapps.data.local.ReadingStatus
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookDetailBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
 /** Add / edit screen for a book. All state lives in [BookDetailViewModel]. */
+@AndroidEntryPoint
 class BookDetailFragment : Fragment() {
 
     private var _binding: FragmentBookDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: BookDetailViewModel by viewModels { BookDetailViewModel.Factory }
+    private val viewModel: BookDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

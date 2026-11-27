@@ -11,11 +11,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import bg.uni_plovdiv.fmi.mobileapps.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Single activity of the app. It hosts the toolbar and the NavHostFragment;
  * every screen is a fragment from res/navigation/nav_graph.xml.
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

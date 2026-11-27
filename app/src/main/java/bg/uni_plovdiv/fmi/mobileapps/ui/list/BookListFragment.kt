@@ -14,8 +14,10 @@ import bg.uni_plovdiv.fmi.mobileapps.R
 import bg.uni_plovdiv.fmi.mobileapps.data.local.Book
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookListBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
 /** Start screen: the list of the user's books. All state lives in [BookListViewModel]. */
+@AndroidEntryPoint
 class BookListFragment : Fragment() {
 
     // The binding is only valid between onCreateView and onDestroyView;
@@ -23,7 +25,7 @@ class BookListFragment : Fragment() {
     private var _binding: FragmentBookListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: BookListViewModel by viewModels { BookListViewModel.Factory }
+    private val viewModel: BookListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

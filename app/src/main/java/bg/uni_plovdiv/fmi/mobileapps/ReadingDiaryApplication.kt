@@ -1,16 +1,11 @@
 package bg.uni_plovdiv.fmi.mobileapps
 
 import android.app.Application
-import bg.uni_plovdiv.fmi.mobileapps.data.BookRepository
-import bg.uni_plovdiv.fmi.mobileapps.data.local.AppDatabase
+import dagger.hilt.android.HiltAndroidApp
 
 /**
- * Application class. Creates the app-wide objects once and hands them to the ViewModels.
- * (Manual dependency injection; Hilt takes over this job later.)
+ * Application class. @HiltAndroidApp starts Hilt, which then creates the
+ * database and repository (see di/DatabaseModule) and injects them where needed.
  */
-class ReadingDiaryApplication : Application() {
-
-    val bookRepository: BookRepository by lazy {
-        BookRepository(AppDatabase.getInstance(this).bookDao())
-    }
-}
+@HiltAndroidApp
+class ReadingDiaryApplication : Application()
