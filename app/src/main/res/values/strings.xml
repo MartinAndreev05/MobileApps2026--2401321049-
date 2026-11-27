@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Читателски дневник</string>
-    <string name="welcome_subtitle">Твоите книги, бележки и прочетени страници на едно място</string>
+
+    <!-- Screen titles -->
+    <string name="title_book_list">Моите книги</string>
+    <string name="title_new_book">Нова книга</string>
+    <string name="title_edit_book">Редакция на книга</string>
+
+    <!-- Book list -->
+    <string name="empty_list_title">Все още нямаш книги</string>
+    <string name="empty_list_hint">Натисни + за да добавиш първата</string>
+    <string name="action_add_book">Добави книга</string>
+
+    <!-- Book form -->
+    <string name="hint_title">Заглавие</string>
+    <string name="hint_author">Автор</string>
+    <string name="hint_notes">Бележки</string>
+    <string name="action_save">Запази</string>
 </resources>

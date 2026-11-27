@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bookListFragment">
+
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="bg.uni_plovdiv.fmi.mobileapps.ui.list.BookListFragment"
+        android:label="@string/title_book_list"
+        tools:layout="@layout/fragment_book_list">
+        <action
+            android:id="@+id/action_bookList_to_bookDetail"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="bg.uni_plovdiv.fmi.mobileapps.ui.detail.BookDetailFragment"
+        android:label="@string/title_new_book"
+        tools:layout="@layout/fragment_book_detail">
+        <!-- -1 means "add a new book"; any other value is the id of the book to edit. -->
+        <argument
+            android:name="bookId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+</navigation>
