@@ -24,6 +24,9 @@
     <color name="md_light_surfaceVariant">#FFF4DED3</color>
     <color name="md_light_onSurfaceVariant">#FF52443C</color>
     <color name="md_light_outline">#FF85746B</color>
+    <color name="md_light_inverseSurface">#FF382E29</color>
+    <color name="md_light_inverseOnSurface">#FFFFEDE5</color>
+    <color name="md_light_inversePrimary">#FFFFB68A</color>
 
     <!-- Dark scheme -->
     <color name="md_dark_primary">#FFFFB68A</color>
@@ -47,6 +50,9 @@
     <color name="md_dark_surfaceVariant">#FF52443C</color>
     <color name="md_dark_onSurfaceVariant">#FFD7C2B8</color>
     <color name="md_dark_outline">#FFA08D84</color>
+    <color name="md_dark_inverseSurface">#FFF0DFD7</color>
+    <color name="md_dark_inverseOnSurface">#FF382E29</color>
+    <color name="md_dark_inversePrimary">#FF8B4F24</color>
 
     <!-- App icon -->
     <color name="ic_launcher_background">#FF8B4F24</color>

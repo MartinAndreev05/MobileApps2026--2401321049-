@@ -37,4 +37,9 @@ class BookRepository(
     suspend fun deleteBook(book: Book) {
         bookDao.delete(book)
     }
+
+    /** Puts a just-deleted book back unchanged (same id and dates), for "Undo". */
+    suspend fun restoreBook(book: Book) {
+        bookDao.insert(book)
+    }
 }

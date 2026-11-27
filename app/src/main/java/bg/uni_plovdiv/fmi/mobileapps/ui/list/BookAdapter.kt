@@ -12,22 +12,38 @@ import bg.uni_plovdiv.fmi.mobileapps.ui.labelRes
 /**
  * Shows books as cards. ListAdapter compares the old and new list with [BookDiff]
  * on a background thread and only redraws the cards that actually changed.
+ *
+ * @param onBookClick called with the tapped book.
  */
-class BookAdapter : ListAdapter<Book, BookAdapter.BookViewHolder>(BookDiff) {
+class BookAdapter(
+    private val onBookClick: (Book) -> Unit,
+) : ListAdapter<Book, BookAdapter.BookViewHolder>(BookDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BookViewHolder(binding)
+        return BookViewHolder(binding, onBookClick)
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class BookViewHolder(private val binding: ItemBookBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    /** The book shown at [position]; used by swipe-to-delete. */
+    fun bookAt(position: Int): Book = getItem(position)
+
+    class BookViewHolder(
+        private val binding: ItemBookBinding,
+        onBookClick: (Book) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        private var book: Book? = null
+
+        init {
+            binding.root.setOnClickListener { book?.let(onBookClick) }
+        }
 
         fun bind(book: Book) {
+            this.book = book
             binding.bookTitle.text = book.title
             binding.bookAuthor.text = book.author
             binding.bookStatus.setText(book.status.labelRes())

@@ -2,18 +2,24 @@ package bg.uni_plovdiv.fmi.mobileapps.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import bg.uni_plovdiv.fmi.mobileapps.R
 import bg.uni_plovdiv.fmi.mobileapps.data.local.ReadingStatus
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookDetailBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 
 /** Add / edit screen for a book. All state lives in [BookDetailViewModel]. */
@@ -56,12 +62,12 @@ class BookDetailFragment : Fragment() {
             binding.authorLayout.showError(errors.author)
             binding.notesLayout.showError(errors.notes)
         }
-        viewModel.saved.observe(viewLifecycleOwner) { saved ->
-            if (saved) {
-                WindowCompat.getInsetsController(requireActivity().window, binding.root)
-                    .hide(WindowInsetsCompat.Type.ime())
-                findNavController().navigateUp()
-            }
+        viewModel.saved.observe(viewLifecycleOwner) { saved -> if (saved) close() }
+        viewModel.deleted.observe(viewLifecycleOwner) { deleted -> if (deleted) close() }
+
+        if (!viewModel.isNewBook) {
+            // The delete icon only exists while this screen is visible and editing a book.
+            requireActivity().addMenuProvider(deleteMenu, viewLifecycleOwner, Lifecycle.State.RESUMED)
         }
 
         binding.saveButton.setOnClickListener {
@@ -72,6 +78,35 @@ class BookDetailFragment : Fragment() {
                 status = selectedStatus(),
             )
         }
+    }
+
+    private val deleteMenu = object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.menu_book_detail, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            if (menuItem.itemId != R.id.action_delete) return false
+            confirmDelete()
+            return true
+        }
+    }
+
+    private fun confirmDelete() {
+        val title = viewModel.book.value?.title ?: binding.titleInput.text.toString()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.delete_dialog_title)
+            .setMessage(getString(R.string.delete_dialog_message, title))
+            .setNegativeButton(R.string.action_cancel, null)
+            .setPositiveButton(R.string.action_delete) { _, _ -> viewModel.delete() }
+            .show()
+    }
+
+    /** Hides the keyboard and goes back to the list. */
+    private fun close() {
+        WindowCompat.getInsetsController(requireActivity().window, binding.root)
+            .hide(WindowInsetsCompat.Type.ime())
+        findNavController().navigateUp()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {

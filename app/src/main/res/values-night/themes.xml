@@ -24,5 +24,9 @@
         <item name="colorSurfaceVariant">@color/md_dark_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/md_dark_onSurfaceVariant</item>
         <item name="colorOutline">@color/md_dark_outline</item>
+        <!-- Used by Snackbar: dark bar in light mode, light bar in dark mode. -->
+        <item name="colorSurfaceInverse">@color/md_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/md_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/md_dark_inversePrimary</item>
     </style>
 </resources>

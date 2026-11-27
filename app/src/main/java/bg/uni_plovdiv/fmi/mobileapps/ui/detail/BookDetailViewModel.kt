@@ -47,6 +47,7 @@ class BookDetailViewModel(
     /** Becomes true once the book is stored, so the screen can close. */
     val saved: LiveData<Boolean> = _saved
 
+    /** True while a save or delete is running; extra taps are ignored. */
     private var saving = false
 
     /**
@@ -81,6 +82,21 @@ class BookDetailViewModel(
                 )
             }
             _saved.value = true
+        }
+    }
+
+    private val _deleted = MutableLiveData(false)
+
+    /** Becomes true once the edited book is deleted, so the screen can close. */
+    val deleted: LiveData<Boolean> = _deleted
+
+    /** Deletes the edited book. Does nothing in "new book" mode. */
+    fun delete() {
+        if (isNewBook || saving) return
+        saving = true
+        viewModelScope.launch {
+            repository.getBook(bookId)?.let { repository.deleteBook(it) }
+            _deleted.value = true
         }
     }
 

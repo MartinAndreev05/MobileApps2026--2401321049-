@@ -24,6 +24,14 @@
     <string name="hint_notes">Бележки</string>
     <string name="action_save">Запази</string>
 
+    <!-- Delete -->
+    <string name="action_delete">Изтрий</string>
+    <string name="action_cancel">Отказ</string>
+    <string name="action_undo">Отмени</string>
+    <string name="delete_dialog_title">Да изтрия ли книгата?</string>
+    <string name="delete_dialog_message">„%1$s“ ще бъде премахната от дневника ти.</string>
+    <string name="book_deleted">„%1$s“ е изтрита</string>
+
     <!-- Form errors -->
     <string name="error_required">Задължително поле</string>
     <string name="error_too_long">Текстът е твърде дълъг</string>
