@@ -4,6 +4,7 @@ import android.content.Context
 import bg.uni_plovdiv.fmi.mobileapps.data.BookRepository
 import bg.uni_plovdiv.fmi.mobileapps.data.local.AppDatabase
 import bg.uni_plovdiv.fmi.mobileapps.data.local.BookDao
+import bg.uni_plovdiv.fmi.mobileapps.data.remote.BookRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,6 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideBookRepository(bookDao: BookDao): BookRepository = BookRepository(bookDao)
+    fun provideBookRepository(bookDao: BookDao, remote: BookRemoteDataSource): BookRepository =
+        BookRepository(bookDao, remote)
 }
