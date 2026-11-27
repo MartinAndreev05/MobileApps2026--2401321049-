@@ -6,21 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import bg.uni_plovdiv.fmi.mobileapps.R
 import bg.uni_plovdiv.fmi.mobileapps.databinding.FragmentBookDetailBinding
 
-/**
- * Add / edit screen for a book. Opened with bookId = -1 for a new book,
- * or with the id of an existing book to edit it.
- */
+/** Add / edit screen for a book. All state lives in [BookDetailViewModel]. */
 class BookDetailFragment : Fragment() {
 
     private var _binding: FragmentBookDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val bookId: Long
-        get() = requireArguments().getLong(ARG_BOOK_ID, NEW_BOOK_ID)
+    private val viewModel: BookDetailViewModel by viewModels { BookDetailViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +30,27 @@ class BookDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (bookId != NEW_BOOK_ID) {
+        if (!viewModel.isNewBook) {
             (requireActivity() as AppCompatActivity).supportActionBar
                 ?.setTitle(R.string.title_edit_book)
         }
+
+        // viewLifecycleOwner (not the fragment itself) stops the observers when the view
+        // is destroyed, so they never touch a dead view and the view is not leaked.
+        viewModel.book.observe(viewLifecycleOwner) { book ->
+            // After a rotation the fields restore what the user typed; don't overwrite it.
+            if (book != null && savedInstanceState == null) {
+                binding.titleInput.setText(book.title)
+                binding.authorInput.setText(book.author)
+                binding.notesInput.setText(book.notes)
+            }
+        }
+        viewModel.saved.observe(viewLifecycleOwner) { saved ->
+            if (saved) findNavController().navigateUp()
+        }
+
         binding.saveButton.setOnClickListener {
-            // Validation and saving to the database are added together with Room.
+            // Validation and the call to viewModel.save() are added with the create flow.
             findNavController().navigateUp()
         }
     }
@@ -46,10 +58,5 @@ class BookDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val ARG_BOOK_ID = "bookId"
-        const val NEW_BOOK_ID = -1L
     }
 }
