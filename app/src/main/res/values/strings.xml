@@ -47,6 +47,23 @@
     <string name="error_unknown">Нещо се обърка. Опитай пак.</string>
     <string name="cover_description">Корица на книгата</string>
 
+    <!-- Photo -->
+    <string name="action_take_photo">Снимай</string>
+    <string name="action_remove_photo">Премахни снимката</string>
+    <string name="camera_rationale_title">Достъп до камерата</string>
+    <string name="camera_rationale_message">Камерата се използва само за да снимаш книгата си. Снимката остава на телефона ти и не се изпраща никъде.</string>
+    <string name="action_continue">Продължи</string>
+    <string name="camera_permission_denied">Без достъп до камерата не може да се снима.</string>
+    <string name="camera_permission_settings">Разреши достъпа до камерата от настройките на приложението.</string>
+    <string name="action_settings">Настройки</string>
+    <string name="no_camera_app">Няма приложение за камера на това устройство.</string>
+
+    <!-- Share -->
+    <string name="action_share">Сподели</string>
+    <string name="share_chooser_title">Сподели книгата чрез</string>
+    <string name="share_text">„%1$s“ от %2$s\nСтатус: %3$s</string>
+    <string name="share_text_notes">\n\nБележки: %1$s</string>
+
     <!-- Form errors -->
     <string name="error_required">Задължително поле</string>
     <string name="error_too_long">Текстът е твърде дълъг</string>

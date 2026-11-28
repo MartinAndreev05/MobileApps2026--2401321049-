@@ -18,6 +18,9 @@ data class Book(
     /** Cover image from Open Library, filled in when the book is found online. */
     @ColumnInfo(name = "cover_url")
     val coverUrl: String? = null,
+    /** Absolute path of the user's own photo (app-private storage), if any. Added in DB version 2. */
+    @ColumnInfo(name = "photo_path")
+    val photoPath: String? = null,
     /** Creation and last-change times, in milliseconds since 1970 (UTC). */
     @ColumnInfo(name = "created_at")
     val createdAt: Long = System.currentTimeMillis(),

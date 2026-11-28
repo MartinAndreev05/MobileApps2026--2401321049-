@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bg.uni_plovdiv.fmi.mobileapps.data.local.Book
 import bg.uni_plovdiv.fmi.mobileapps.databinding.ItemBookBinding
 import bg.uni_plovdiv.fmi.mobileapps.ui.labelRes
-import bg.uni_plovdiv.fmi.mobileapps.ui.loadCover
+import bg.uni_plovdiv.fmi.mobileapps.ui.loadBookImage
 
 /**
  * Shows books as cards. ListAdapter compares the old and new list with [BookDiff]
@@ -48,7 +48,7 @@ class BookAdapter(
             binding.bookTitle.text = book.title
             binding.bookAuthor.text = book.author
             binding.bookStatus.setText(book.status.labelRes())
-            binding.bookCover.loadCover(book.coverUrl)
+            binding.bookCover.loadBookImage(book.photoPath, book.coverUrl)
         }
     }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Folders FileProvider may share. Only the photos folder; nothing else of the app's files. -->
+<paths>
+    <files-path
+        name="photos"
+        path="photos/" />
+</paths>
